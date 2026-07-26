@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Cursor / local agent tooling
+.cursor/
+.impeccable/
+
+# Local design notes (not for the public repo)
+DESIGN.md
+PRODUCT.md
+
+# Design critique harness (Playwright) and screenshots
+assets/_critique-pw/
+assets/_critique*.png
+assets/_critique*.jpg
+assets/_critique*.webp
+
+# OS junk
+.DS_Store
+.DS_Store?
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and env
+*.log
+.env
+.env.*
+!.env.example
+
+# Misc local clutter
+*.tmp
+*.temp
+.cache/

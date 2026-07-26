@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- theme-color matches --color-nier-bg -->
+    <meta name="theme-color" content="#c8c2aa">
+    <meta name="description" content="Galvin M. Gonzales, third-year BS CS at UPLB. PSE EDGE filing registry, Pathag (YSES collegiate champion), KitaCred (BPI Data Wave 2025 Track 2, 1st place).">
+    <title>Galvin M. Gonzales · CS Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="flex.css">
+    <script>document.documentElement.classList.add("has-js");</script>
+  </head>
+
+  <body>
+    <div class="nier-shell">
+      <a href="#main-content" class="nier-skip-link">Skip to main content</a>
+      <div class="nier-ornament" aria-hidden="true"></div>
+
+      <div class="nier-shell-body">
+        <nav aria-label="Section">
+          <div class="nav_bar">
+            <a href="#bio" class="nier-btn nier-btn--compact" aria-current="true">[ BIO ]</a>
+            <a href="#achievements" class="nier-btn nier-btn--compact">[ ACHIEVEMENTS ]</a>
+            <a href="#projects" class="nier-btn nier-btn--compact">[ PROJECTS ]</a>
+            <a href="#skills" class="nier-btn nier-btn--compact">[ SKILLS ]</a>
+          </div>
+        </nav>
+
+        <div class="dossier">
+          <div class="dossier-left">
+            <aside class="dossier-rail nier-outer-box" id="bio">
+              <div class="nier-inner-box">
+                <div class="dossier-identity">
+                  <div class="photo-frame">
+                    <img
+                      src="profile_pic.jpg"
+                      alt="Portrait of Galvin M. Gonzales"
+                      width="140"
+                      height="140"
+                      decoding="async"
+                      fetchpriority="high"
+                    >
+                  </div>
+
+                  <div class="bio-text">
+                    <h1 class="nier-proper-name">Galvin M. Gonzales</h1>
+                    <p class="bio-type">TYPE: <span>CS_STUDENT</span> · YEAR: <span>3</span></p>
+                    <p class="bio-edu nier-meta">BS Computer Science · UPLB · 2024–2028</p>
+                    <hr class="bio-divider">
+                    <p class="nier-sentence">
+                      Led Pathag to YSES collegiate champion and KitaCred to 1st place at BPI Data Wave 2025 Track 2. Ships a live PSE EDGE filing registry at rkoperator-ledger.com.
+                    </p>
+                    <p class="bio-contact nier-sentence">
+                      Contact:
+                      <a href="mailto:gmgonzales6@up.edu.ph">gmgonzales6@up.edu.ph</a>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bio-actions" role="group" aria-label="Primary action">
+                  <a
+                    class="nier-btn nier-btn--ink"
+                    href="https://rkoperator-ledger.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >OPEN REGISTRY<span class="visually-hidden"> (opens in new tab)</span></a>
+                </div>
+
+                <section id="achievements" aria-labelledby="achievements-heading">
+                  <h2 class="section-heading" id="achievements-heading">// ACHIEVEMENTS</h2>
+                  <ul class="skill-list">
+                    <li>1st Place, Track 2, BPI Data Wave Hackathon 2025</li>
+                    <li>Collegiate Champion, EXPE21ENCE YSES: The HackFest (Team Iterate)</li>
+                    <li>International Conference Presenter, Networked Learning PH (2024)</li>
+                  </ul>
+                </section>
+              </div>
+            </aside>
+
+            <section class="dossier-skills nier-outer-box" id="skills" aria-labelledby="skills-heading">
+              <div class="nier-inner-box">
+                <h2 class="section-heading" id="skills-heading">// SKILLS</h2>
+                <dl class="skill-clusters">
+                  <div class="skill-cluster">
+                    <dt>Languages</dt>
+                    <dd>Python · Java · C · SQL · HTML · CSS · JavaScript</dd>
+                  </div>
+                  <div class="skill-cluster">
+                    <dt>Backend / Data</dt>
+                    <dd>FastAPI · Django · Flask · PostgreSQL · PostGIS · SQLite</dd>
+                  </div>
+                  <div class="skill-cluster">
+                    <dt>ML</dt>
+                    <dd>TensorFlow · PyTorch · OpenCV</dd>
+                  </div>
+                  <div class="skill-cluster">
+                    <dt>Tools</dt>
+                    <dd>Git · GitHub</dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
+          </div>
+
+          <main class="dossier-projects nier-outer-box" id="main-content" tabindex="-1">
+            <div class="nier-inner-box">
+              <section id="projects" aria-labelledby="projects-heading">
+                <h2 class="section-heading" id="projects-heading">// PROJECTS</h2>
+
+                <article class="project-featured">
+                  <div class="project-featured-inner">
+                    <header class="project-featured-header">
+                      <h3 class="project-featured-title">&gt;&gt; PROJECT: RK OPERATOR LEDGER</h3>
+                      <p class="project-featured-meta">PSE FILINGS · LIVE REGISTRY</p>
+                    </header>
+
+                    <p class="project-featured-copy project-featured-copy--lead nier-sentence">
+                      Live registry: screen a PSE ticker from filing-backed numbers, then watchlist and compare.
+                    </p>
+
+                    <div class="project-monitor">
+                      <div class="project-monitor-screen" data-monitor>
+                        <video
+                          id="rk-preview"
+                          poster="assets/rk-operator-ledger-poster.jpg"
+                          width="960"
+                          height="540"
+                          muted
+                          loop
+                          playsinline
+                          controls
+                          preload="none"
+                          aria-label="Short walkthrough of RK Operator Ledger"
+                        >
+                          <source src="assets/rk-operator-ledger-preview.webm" type="video/webm">
+                          <source src="assets/rk-operator-ledger-preview.mp4" type="video/mp4">
+                        </video>
+                        <button
+                          type="button"
+                          class="project-monitor-play"
+                          data-monitor-play
+                          aria-controls="rk-preview"
+                          aria-label="Play walkthrough of RK Operator Ledger"
+                        >
+                          <span class="project-monitor-play-label" aria-hidden="true">[ PLAY ]</span>
+                        </button>
+                        <button
+                          type="button"
+                          class="project-monitor-pause"
+                          data-monitor-pause
+                          aria-controls="rk-preview"
+                          aria-label="Pause walkthrough"
+                          hidden
+                        >
+                          <span aria-hidden="true">[ PAUSE ]</span>
+                        </button>
+                        <p
+                          class="project-monitor-status"
+                          data-monitor-status
+                          role="status"
+                          aria-live="polite"
+                          hidden
+                        >
+                          Playback unavailable. Check the connection, then retry, or use OPEN REGISTRY in Bio.
+                        </p>
+                      </div>
+                    </div>
+
+                    <p class="project-featured-copy nier-sentence">
+                      Python ETL from PSE EDGE HTML and ranked 17-A/AFS PDFs into SQLite; Django REST API and React (Vite) front end with P/E, P/B, ROE, yield, ROIC, and D/E thresholds.
+                    </p>
+                  </div>
+                </article>
+
+                <a
+                  class="project-card project-card--link project-card--lead"
+                  href="https://github.com/SenjoNanaya/Pathag"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <h3 class="project-card-item">&gt;&gt; PROJECT: PATHAG</h3>
+                  <span class="visually-hidden"> (opens in new tab)</span>
+                  <p class="project-card-kicker nier-meta">YSES HACKFEST · TEAM ITERATE · UPLB</p>
+                  <p class="nier-sentence">
+                    &gt; Led Team Iterate to collegiate champion at EXPE21ENCE YSES: The HackFest with a pedestrian-accessibility navigation prototype for the UPLB campus.
+                  </p>
+                  <p class="nier-sentence">
+                    &gt; FastAPI + PostgreSQL/PostGIS for spatial route scoring; REST and WebSocket endpoints for obstacle reports and LGU exports; MobileNetV3 ML service and Flutter prototype.
+                  </p>
+                </a>
+
+                <a
+                  class="project-card project-card--link project-card--win"
+                  href="https://www.youtube.com/watch?v=1t4Q26SBfEI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <h3 class="project-card-item">&gt;&gt; PROJECT: KITACRED</h3>
+                  <span class="visually-hidden"> (opens in new tab)</span>
+                  <p class="project-card-kicker nier-meta">BPI DATA WAVE 2025 · TRACK 2 · 1ST PLACE</p>
+                  <p class="nier-sentence">
+                    &gt; Team lead of 4; 1st place at BPI Data Wave 2025 Track 2 with a Python/PyTorch alternative-data trust score for microfinance assessment.
+                  </p>
+                  <p class="nier-sentence">
+                    &gt; Realigned the pitch from Eskwelabs mentor feedback into an interactive explainable-AI mockup matched to BPI's stated needs.
+                  </p>
+                </a>
+
+                <a
+                  class="project-card project-card--link"
+                  href="https://github.com/SenjoNanaya/One-shot-Image-Recognition"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <h3 class="project-card-item">&gt;&gt; PROJECT: CIEL - ONE-SHOT FACIAL RECOGNITION</h3>
+                  <span class="visually-hidden"> (opens in new tab)</span>
+                  <p class="nier-sentence">
+                    &gt; Python one-shot facial verification with TensorFlow, Keras, and OpenCV: Siamese network (Koch et al., ICML 2015) matching a webcam frame to enrolled faces from few training images.
+                  </p>
+                  <p class="nier-sentence">
+                    &gt; Trained 50 epochs (Adam, BinaryCrossentropy); real-time verification at 0.5 detection and verification thresholds.
+                  </p>
+                </a>
+
+                <article
+                  class="project-card project-card--archive"
+                  aria-label="TAP:SCANS capstone and NLPH 2024 talk. Archive entry with no external link."
+                >
+                  <h3 class="project-card-item">&gt;&gt; PROJECT: TAP:SCANS CAPSTONE &amp; NLPH Conference 2024</h3>
+                  <p class="project-card-kicker nier-meta">ARCHIVE · NO EXTERNAL LINK</p>
+                  <p class="nier-sentence">
+                    &gt; Python RFID attendance tracker (Google Sheets + Glide). Led a 30-teacher survey study (Pearson r, regression, qualitative coding) and presented at Networked Learning PH 2024.
+                  </p>
+                </article>
+              </section>
+            </div>
+          </main>
+        </div>
+
+        <footer class="footer-bar">
+          <div class="footer-text">
+            <p>GLORY TO MANKIND [ <a href="#main-content">BACK_TO_TOP</a> ]</p>
+            <p>
+              <small>
+                2026 Galvin | Contact:
+                <a href="mailto:gmgonzales6@up.edu.ph">gmgonzales6@up.edu.ph</a>
+              </small>
+            </p>
+          </div>
+        </footer>
+      </div>
+
+      <div class="nier-ornament nier-ornament--flip" aria-hidden="true"></div>
+    </div>
+    <script>
+      (function () {
+        var navLinks = document.querySelectorAll('.nav_bar a[href^="#"]');
+        if (navLinks.length && "IntersectionObserver" in window) {
+          var linkById = {};
+          navLinks.forEach(function (a) {
+            var id = a.getAttribute("href").slice(1);
+            if (id) linkById[id] = a;
+          });
+          var setCurrent = function (id) {
+            navLinks.forEach(function (a) {
+              a.removeAttribute("aria-current");
+            });
+            if (linkById[id]) linkById[id].setAttribute("aria-current", "true");
+          };
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) setCurrent(entry.target.id);
+              });
+            },
+            { rootMargin: "-18% 0px -62% 0px", threshold: 0 }
+          );
+          ["bio", "achievements", "projects", "skills"].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) observer.observe(el);
+          });
+        }
+
+        var portrait = document.querySelector(".photo-frame img");
+        if (portrait) {
+          portrait.addEventListener("error", function () {
+            portrait.removeAttribute("src");
+            portrait.alt = "Portrait unavailable";
+            portrait.classList.add("is-broken");
+          });
+        }
+
+        function isOffline() {
+          return typeof navigator !== "undefined" && navigator.onLine === false;
+        }
+
+        document.querySelectorAll("[data-monitor]").forEach(function (screen) {
+          var video = screen.querySelector("video");
+          var playBtn = screen.querySelector("[data-monitor-play]");
+          var pauseBtn = screen.querySelector("[data-monitor-pause]");
+          var statusEl = screen.querySelector("[data-monitor-status]");
+          var playLabel = playBtn && playBtn.querySelector(".project-monitor-play-label");
+          if (!video || !playBtn || !pauseBtn) return;
+
+          // Progressive enhancement: native controls without JS; custom chrome with JS
+          video.removeAttribute("controls");
+          screen.classList.add("is-enhanced");
+          document.documentElement.classList.add("has-js");
+
+          var arming = false;
+          var playLabelDefault = playLabel ? playLabel.textContent : "";
+
+          function setArmingUi(on) {
+            playBtn.disabled = on;
+            playBtn.setAttribute("aria-busy", on ? "true" : "false");
+            if (playLabel) {
+              playLabel.textContent = on ? "[ LOADING… ]" : playLabelDefault;
+            }
+          }
+
+          function showPlaying() {
+            arming = false;
+            setArmingUi(false);
+            screen.classList.remove("is-error");
+            if (statusEl) statusEl.hidden = true;
+            screen.classList.add("is-playing");
+            pauseBtn.hidden = false;
+          }
+
+          function resetToPoster() {
+            arming = false;
+            setArmingUi(false);
+            screen.classList.remove("is-playing");
+            pauseBtn.hidden = true;
+          }
+
+          function showError() {
+            arming = false;
+            setArmingUi(false);
+            screen.classList.remove("is-playing");
+            pauseBtn.hidden = true;
+            screen.classList.add("is-error");
+            if (statusEl) statusEl.hidden = false;
+            if (playLabel) playLabel.textContent = "[ RETRY WALKTHROUGH ]";
+          }
+
+          function waitForPaintedFrame(timeoutMs) {
+            return new Promise(function (resolve, reject) {
+              var settled = false;
+              function onTick() {
+                if (video.currentTime > 0) finish(true);
+              }
+              function cleanup() {
+                window.clearTimeout(timer);
+                video.removeEventListener("timeupdate", onTick);
+              }
+              function finish(ok) {
+                if (settled) return;
+                settled = true;
+                cleanup();
+                if (ok) resolve();
+                else reject(new Error("no frame"));
+              }
+              var timer = window.setTimeout(function () {
+                finish(video.currentTime > 0);
+              }, timeoutMs);
+
+              if (typeof video.requestVideoFrameCallback === "function") {
+                video.requestVideoFrameCallback(function () {
+                  finish(true);
+                });
+                return;
+              }
+
+              video.addEventListener("timeupdate", onTick);
+              video.addEventListener(
+                "playing",
+                function () {
+                  window.setTimeout(onTick, 200);
+                },
+                { once: true }
+              );
+            });
+          }
+
+          playBtn.addEventListener("click", function () {
+            if (screen.classList.contains("is-playing") || arming) return;
+            if (isOffline()) {
+              showError();
+              return;
+            }
+            if (screen.classList.contains("is-error")) {
+              screen.classList.remove("is-error");
+              if (statusEl) statusEl.hidden = true;
+              if (playLabel) playLabel.textContent = playLabelDefault;
+            }
+            arming = true;
+            setArmingUi(true);
+            video.muted = true;
+            var playPromise = video.play();
+            var started =
+              playPromise && typeof playPromise.then === "function"
+                ? playPromise
+                : Promise.resolve();
+
+            started
+              .then(function () {
+                return waitForPaintedFrame(2500);
+              })
+              .then(showPlaying)
+              .catch(function () {
+                try {
+                  video.pause();
+                } catch (e) {}
+                showError();
+              });
+          });
+
+          pauseBtn.addEventListener("click", function () {
+            try {
+              video.pause();
+            } catch (e) {}
+            try {
+              video.currentTime = 0;
+            } catch (e) {}
+            resetToPoster();
+          });
+
+          video.addEventListener("ended", function () {
+            resetToPoster();
+            try {
+              video.currentTime = 0;
+            } catch (e) {}
+          });
+
+          video.addEventListener("error", function () {
+            showError();
+          });
+
+          window.addEventListener("offline", function () {
+            if (screen.classList.contains("is-playing")) {
+              try {
+                video.pause();
+              } catch (e) {}
+              showError();
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

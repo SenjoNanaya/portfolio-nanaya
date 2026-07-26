@@ -1,0 +1,1431 @@
+/*
+  YoRHa / NieR:Automata portfolio chrome.
+  Tokens and patterns adapted from Edge (DESIGN.md + frontend/src/index.css).
+  Heritage: Lev CodePen (levise) + in-game YorHa menus.
+*/
+
+:root {
+  --color-nier-bg: #c8c2aa;
+  --color-nier-dark: #3f3b32;
+  --color-nier-dark-muted: #4a453c;
+  --color-nier-light: #dcd8c0;
+  --color-nier-gray: #bab5a1;
+  --color-nier-orange: #a67c52;
+  --color-nier-orange-ink: #5c4024;
+
+  --font-nier: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --text-caption: 0.75rem;
+  --text-dense: 0.8125rem;
+  --text-ui: 0.8125rem;
+  --text-label: 0.875rem;
+  --text-body: 1rem;
+  --text-heading: 1.125rem;
+  --text-title: 1.25rem;
+
+  --tracking-ui: 0.1em;
+  --tracking-display: 0.18em;
+  --tracking-name: 0.02em;
+
+  --space-xs: 0.4rem;
+  --space-sm: 0.65rem;
+  --space-md: 0.85rem;
+  --space-lg: 1.25rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2.25rem;
+  --space-shell: 3px;
+  --space-matte: 4px;
+  --space-hair: 0.15rem;
+
+  --ease-nier-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-nier-fast: 0.12s;
+  --duration-nier-mid: 0.15s;
+  --duration-nier-ui: 0.22s;
+
+  --surface-nier-inner: color-mix(in srgb, var(--color-nier-light) 42%, transparent);
+  --surface-nier-panel: color-mix(in srgb, var(--color-nier-light) 40%, transparent);
+  --surface-nier-recessed: color-mix(in srgb, var(--color-nier-light) 28%, transparent);
+  --shadow-nier-lift: 3px 3px 0 color-mix(in srgb, var(--color-nier-dark) 40%, transparent);
+  --shadow-nier-lift-strong: 3px 3px 0 color-mix(in srgb, var(--color-nier-dark) 45%, transparent);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#bio,
+#achievements,
+#skills,
+#projects,
+#main-content {
+  scroll-margin-top: max(var(--space-lg), env(safe-area-inset-top, 0));
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--color-nier-dark);
+  font-family: var(--font-nier);
+  font-weight: 400;
+  font-size: 100%;
+  letter-spacing: 0.05em;
+  line-height: 1.45;
+  background-color: var(--color-nier-bg);
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 3px,
+      color-mix(in srgb, var(--color-nier-dark) 7%, transparent) 4px
+    ),
+    linear-gradient(
+      transparent 0,
+      transparent 3px,
+      color-mix(in srgb, var(--color-nier-dark) 7%, transparent) 4px
+    );
+  background-size: 4px 4px;
+  box-shadow:
+    inset 0 0 120px color-mix(in srgb, var(--color-nier-dark) 38%, transparent),
+    inset 0 0 220px color-mix(in srgb, var(--color-nier-dark) 22%, transparent);
+}
+
+/* ---- Shell ---- */
+
+.nier-shell {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0);
+  padding-right: max(clamp(1rem, 3vw, 2.5rem), env(safe-area-inset-right, 0));
+  padding-bottom: max(var(--space-xl), env(safe-area-inset-bottom, 0));
+  padding-left: max(clamp(1rem, 3vw, 2.5rem), env(safe-area-inset-left, 0));
+  overflow-x: clip;
+}
+
+.nier-shell-body {
+  flex: 1;
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  animation: nier-view-settle var(--duration-nier-ui) var(--ease-nier-out) both;
+}
+
+.nier-skip-link {
+  position: absolute;
+  left: max(var(--space-sm), env(safe-area-inset-left, 0));
+  top: max(var(--space-sm), env(safe-area-inset-top, 0));
+  z-index: 100;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-nier-dark);
+  color: var(--color-nier-bg);
+  font-size: var(--text-ui);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateY(-150%);
+  transition: transform var(--duration-nier-mid) var(--ease-nier-out);
+}
+
+.nier-skip-link:focus,
+.nier-skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--color-nier-bg);
+  outline-offset: 2px;
+}
+
+/* Analog menu rails */
+.nier-ornament {
+  flex-shrink: 0;
+  border-top: 2px solid var(--color-nier-dark);
+  margin: 0 calc(-1 * clamp(1rem, 3vw, 2.5rem));
+  padding: 0 clamp(1rem, 3vw, 2.5rem);
+}
+
+.nier-ornament::after {
+  content: "";
+  display: block;
+  height: 18px;
+  background-repeat: repeat-x;
+  background-size:
+    50px 3px,
+    50px 1px, 50px 1px, 50px 1px, 50px 1px,
+    50px 1px, 50px 1px, 50px 1px, 50px 1px;
+  background-position:
+    0 0,
+    22px 4px, 22px 5px, 22px 6px, 22px 7px,
+    28px 8px, 28px 9px, 28px 10px, 28px 11px;
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--color-nier-dark),
+      var(--color-nier-dark) 10px,
+      transparent 10px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent),
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 1px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 1px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 2px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 2px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 4px,
+      transparent 4px,
+      transparent 12px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 12px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 13px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 13px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 14px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 14px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 16px,
+      transparent 16px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent),
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 1px,
+      var(--color-nier-dark) 1px,
+      var(--color-nier-dark) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 4px,
+      transparent 4px,
+      transparent 12px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 12px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 13px,
+      var(--color-nier-dark) 13px,
+      var(--color-nier-dark) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 16px,
+      transparent 16px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent),
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 1px,
+      var(--color-nier-dark) 1px,
+      var(--color-nier-dark) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 4px,
+      transparent 4px,
+      transparent 12px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 12px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 13px,
+      var(--color-nier-dark) 13px,
+      var(--color-nier-dark) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 16px,
+      transparent 16px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent),
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 1px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 1px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 2px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 2px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 4px,
+      transparent 4px,
+      transparent 12px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 12px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 13px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 13px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 14px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 14px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 16px,
+      transparent 16px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent),
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 1px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 1px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 2px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 2px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 4px,
+      transparent 4px,
+      transparent 12px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 12px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 13px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 13px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 14px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 14px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 16px,
+      transparent 16px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent),
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 1px,
+      var(--color-nier-dark) 1px,
+      var(--color-nier-dark) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 4px,
+      transparent 4px,
+      transparent 12px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 12px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 13px,
+      var(--color-nier-dark) 13px,
+      var(--color-nier-dark) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 16px,
+      transparent 16px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent),
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 1px,
+      var(--color-nier-dark) 1px,
+      var(--color-nier-dark) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 4px,
+      transparent 4px,
+      transparent 12px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 12px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 13px,
+      var(--color-nier-dark) 13px,
+      var(--color-nier-dark) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 16px,
+      transparent 16px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent),
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 1px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 1px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 2px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 2px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 3px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 4px,
+      transparent 4px,
+      transparent 12px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 12px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 13px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 13px,
+      color-mix(in srgb, var(--color-nier-dark) 80%, transparent) 14px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 14px,
+      color-mix(in srgb, var(--color-nier-dark) 90%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 15px,
+      color-mix(in srgb, var(--color-nier-dark) 40%, transparent) 16px,
+      transparent 16px
+    );
+}
+
+.nier-ornament--flip {
+  border-top: none;
+  border-bottom: 2px solid var(--color-nier-dark);
+}
+
+.nier-ornament--flip::after {
+  transform: scaleY(-1);
+  transform-origin: center;
+}
+
+/* ---- Type helpers ---- */
+
+.nier-meta {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-nier-dark-muted);
+}
+
+.nier-sentence {
+  text-transform: none;
+  letter-spacing: var(--tracking-name);
+  font-weight: 400;
+}
+
+.nier-proper-name {
+  text-transform: none;
+  letter-spacing: var(--tracking-name);
+  font-weight: 500;
+}
+
+.nier-ink-muted {
+  color: var(--color-nier-dark-muted);
+}
+
+.text-nier-orange {
+  color: var(--color-nier-orange-ink);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Nav ---- */
+
+.nav_bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) 0 var(--space-sm);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-nier-dark) 35%, transparent);
+}
+
+.nier-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-nier-dark);
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--color-nier-light);
+  color: var(--color-nier-dark);
+  font-family: inherit;
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color var(--duration-nier-fast) var(--ease-nier-out),
+    background-color var(--duration-nier-mid) var(--ease-nier-out),
+    border-color var(--duration-nier-mid) var(--ease-nier-out);
+  overflow: hidden;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  isolation: isolate;
+}
+
+a.nier-btn:link,
+a.nier-btn:visited {
+  color: var(--color-nier-dark);
+  text-decoration: none;
+}
+
+.nier-btn::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 3px 0;
+  width: 100%;
+  background-color: var(--color-nier-dark);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--duration-nier-ui) var(--ease-nier-out);
+  pointer-events: none;
+}
+
+.nier-btn:hover,
+.nier-btn:focus-visible {
+  background-color: transparent;
+  color: var(--color-nier-bg);
+  border-color: var(--color-nier-dark);
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+a.nier-btn:hover,
+a.nier-btn:focus-visible {
+  color: var(--color-nier-bg);
+}
+
+.nier-btn:hover::before,
+.nier-btn:focus-visible::before,
+.nier-btn:active::before {
+  transform: scaleX(1);
+}
+
+.nier-btn:active {
+  color: var(--color-nier-bg);
+  background-color: transparent;
+}
+
+.nier-btn--ink {
+  background-color: var(--color-nier-dark);
+  color: var(--color-nier-bg);
+}
+
+a.nier-btn--ink:link,
+a.nier-btn--ink:visited {
+  color: var(--color-nier-bg);
+}
+
+.nier-btn--ink::before {
+  background-color: var(--color-nier-light);
+}
+
+.nier-btn--ink:hover,
+.nier-btn--ink:focus-visible,
+.nier-btn--ink:active {
+  color: var(--color-nier-dark);
+  background-color: transparent;
+}
+
+a.nier-btn--ink:hover,
+a.nier-btn--ink:focus-visible {
+  color: var(--color-nier-dark);
+}
+
+.nier-btn--compact {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--text-dense);
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  letter-spacing: 0.08em;
+}
+
+.nav_bar .nier-btn--compact[aria-current="true"] {
+  background-color: var(--color-nier-dark);
+  color: var(--color-nier-bg);
+  font-weight: 600;
+}
+
+.nav_bar a.nier-btn--compact[aria-current="true"]:link,
+.nav_bar a.nier-btn--compact[aria-current="true"]:visited {
+  color: var(--color-nier-bg);
+}
+
+/* ---- Layout ---- */
+
+/* Recruiter scan path: identity+wins | projects ; skills after proof on mobile */
+.dossier {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-areas: "left projects";
+  gap: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.dossier-left {
+  grid-area: left;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.dossier-rail,
+.dossier-skills,
+.dossier-projects {
+  min-width: 0;
+}
+
+.dossier-projects {
+  grid-area: projects;
+}
+
+@media (min-width: 769px) {
+  .dossier-left {
+    position: sticky;
+    top: max(var(--space-lg), env(safe-area-inset-top, 0));
+    align-self: start;
+    max-height: calc(100vh - var(--space-2xl));
+    max-height: calc(100dvh - var(--space-2xl));
+    overflow: auto;
+  }
+}
+
+.nier-outer-box {
+  border: 2px solid var(--color-nier-dark);
+  padding: var(--space-shell);
+  background: transparent;
+  box-shadow: var(--shadow-nier-lift-strong);
+}
+
+.nier-inner-box {
+  border: 1px solid var(--color-nier-dark);
+  height: 100%;
+  background: var(--surface-nier-inner);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+}
+
+.dossier-skills .nier-inner-box {
+  padding: var(--space-md) var(--space-lg);
+}
+
+.photo-frame {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.photo-frame img {
+  max-width: 140px;
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--color-nier-dark);
+  padding: var(--space-matte);
+  background: var(--color-nier-dark);
+  filter: sepia(100%) contrast(0.9);
+  box-shadow: var(--shadow-nier-lift);
+}
+
+.photo-frame img.is-broken {
+  filter: none;
+  min-height: 5rem;
+  object-fit: none;
+  background: var(--surface-nier-recessed);
+  color: var(--color-nier-dark-muted);
+  font-size: var(--text-caption);
+}
+
+.bio-text h1 {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-title);
+  font-weight: 700;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  text-wrap: balance;
+  border-bottom: 2px solid var(--color-nier-dark);
+  display: inline-block;
+  padding-bottom: var(--space-hair);
+}
+
+.bio-text h1.nier-proper-name {
+  font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-name);
+  text-transform: none;
+}
+
+.bio-text .bio-type {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-nier-dark-muted);
+}
+
+.bio-text .bio-type span {
+  color: var(--color-nier-orange-ink);
+  font-weight: 600;
+}
+
+.bio-edu {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--text-dense);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-nier-dark);
+}
+
+.bio-contact {
+  margin: 0;
+  font-size: var(--text-ui);
+  max-width: 65ch;
+}
+
+.bio-contact a {
+  color: var(--color-nier-orange-ink);
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.bio-contact a:hover,
+.bio-contact a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.bio-contact a:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+.bio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin: var(--space-sm) 0 0;
+}
+
+.bio-actions .nier-btn {
+  flex: 1 1 100%;
+  width: 100%;
+  min-width: 0;
+}
+
+.bio-divider {
+  border: none;
+  border-top: 1px solid var(--color-nier-gray);
+  margin: 0 0 var(--space-md);
+}
+
+.bio-text {
+  margin-bottom: 0;
+}
+
+.bio-text > p {
+  margin: 0;
+}
+
+.bio-text > p + p {
+  margin-top: var(--space-sm);
+}
+
+.section-heading {
+  margin: var(--space-2xl) 0 var(--space-sm);
+  font-size: var(--text-heading);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  text-wrap: balance;
+  border-bottom: 2px solid var(--color-nier-dark);
+  display: inline-block;
+  padding-bottom: var(--space-hair);
+}
+
+.section-heading:first-child {
+  margin-top: 0;
+}
+
+/* Wins = distinct proof block; skills sit in their own shell after projects on mobile */
+#achievements {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid color-mix(in srgb, var(--color-nier-dark) 28%, transparent);
+}
+
+#achievements .section-heading {
+  margin-top: 0;
+}
+
+.dossier-skills .section-heading {
+  margin-top: 0;
+  font-size: var(--text-label);
+  font-weight: 500;
+  color: var(--color-nier-dark-muted);
+  border-bottom-color: color-mix(in srgb, var(--color-nier-dark) 55%, transparent);
+}
+
+.skill-clusters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin: 0;
+  color: var(--color-nier-dark-muted);
+  font-size: var(--text-ui);
+}
+
+.skill-cluster {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, 7.5rem) minmax(0, 1fr);
+  gap: var(--space-xs) var(--space-sm);
+  align-items: baseline;
+}
+
+.skill-cluster dt {
+  margin: 0;
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-nier-dark-muted);
+}
+
+.skill-cluster dd {
+  margin: 0;
+  line-height: 1.5;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.skill-list {
+  list-style: square;
+  line-height: 1.55;
+  margin: 0;
+  padding-inline-start: var(--space-lg);
+  color: var(--color-nier-dark);
+}
+
+.skill-list li {
+  margin-bottom: var(--space-xs);
+}
+
+.skill-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- Projects ---- */
+
+#projects {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+#projects > .section-heading {
+  margin-bottom: 0;
+}
+
+.project-card {
+  display: block;
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-panel);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: 0;
+  box-shadow: var(--shadow-nier-lift);
+  color: var(--color-nier-dark);
+  text-decoration: none;
+  transition:
+    background-color var(--duration-nier-ui) var(--ease-nier-out),
+    color var(--duration-nier-ui) var(--ease-nier-out),
+    box-shadow var(--duration-nier-ui) var(--ease-nier-out),
+    transform var(--duration-nier-ui) var(--ease-nier-out);
+}
+
+/* Static / archive cards: present, not clickable — quieter than linked siblings */
+article.project-card {
+  box-shadow: none;
+  background: var(--surface-nier-recessed);
+  cursor: default;
+}
+
+article.project-card--archive {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--color-nier-dark) 55%, transparent);
+}
+
+article.project-card--archive .project-card-kicker {
+  color: var(--color-nier-dark-muted);
+}
+
+article.project-card--archive .project-card-item {
+  font-size: var(--text-label);
+  font-weight: 600;
+}
+
+a.project-card--link {
+  cursor: pointer;
+}
+
+a.project-card--link:hover,
+a.project-card--link:focus-visible {
+  background-color: var(--color-nier-dark);
+  color: var(--color-nier-bg);
+  box-shadow: none;
+  transform: translate(2px, 2px);
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+a.project-card--link:hover .project-card-item,
+a.project-card--link:focus-visible .project-card-item,
+a.project-card--link:hover .nier-meta,
+a.project-card--link:focus-visible .nier-meta {
+  color: var(--color-nier-bg);
+}
+
+.project-card-item {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--text-heading);
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 0 0 var(--space-xs);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+h3.project-card-item {
+  font-size: var(--text-heading);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+a.project-card--link h3.project-card-item {
+  color: inherit;
+}
+
+.project-card-kicker {
+  margin: 0 0 var(--space-sm);
+}
+
+.project-card p {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-ui);
+  line-height: 1.5;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  max-width: 65ch;
+}
+
+.project-card p:last-child {
+  margin-bottom: 0;
+}
+
+.dossier-projects:focus {
+  outline: none;
+}
+
+.dossier-projects:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 4px;
+}
+
+/* Featured Ledger */
+
+.project-featured {
+  margin-bottom: 0;
+  border: 2px solid var(--color-nier-dark);
+  padding: var(--space-shell);
+  background: transparent;
+  box-shadow: var(--shadow-nier-lift-strong);
+}
+
+.project-featured-inner {
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-inner);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.project-card--lead,
+.project-card--win {
+  margin-bottom: 0;
+}
+
+.project-card--win {
+  border-color: color-mix(in srgb, var(--color-nier-dark) 85%, var(--color-nier-orange-ink));
+}
+
+.project-featured-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.project-featured-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2vw, 1.375rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+.project-featured-meta {
+  margin: 0;
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-nier-orange-ink);
+}
+
+.project-monitor {
+  border: 2px solid var(--color-nier-dark);
+  padding: var(--space-shell);
+  background: var(--color-nier-dark);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-nier-bg) 25%, transparent);
+}
+
+.project-monitor-screen {
+  border: 1px solid color-mix(in srgb, var(--color-nier-bg) 40%, transparent);
+  background-color: var(--color-nier-dark);
+  background-image: url("assets/rk-operator-ledger-poster.jpg");
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-monitor-screen video,
+.project-monitor-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.project-monitor-screen video {
+  background: var(--color-nier-dark);
+}
+
+.project-monitor-play {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 0;
+  padding: var(--space-md);
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  color: var(--color-nier-bg);
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-nier-dark) 55%, transparent) 0%,
+    color-mix(in srgb, var(--color-nier-dark) 12%, transparent) 45%,
+    transparent 70%
+  );
+  font-family: inherit;
+  transition: background-color var(--duration-nier-ui) var(--ease-nier-out);
+}
+
+html.has-js .project-monitor-play {
+  display: flex;
+}
+
+.project-monitor-play:disabled {
+  cursor: wait;
+  opacity: 0.85;
+}
+
+.project-monitor-play:hover,
+.project-monitor-play:focus-visible {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-nier-dark) 70%, transparent) 0%,
+    color-mix(in srgb, var(--color-nier-dark) 22%, transparent) 50%,
+    transparent 75%
+  );
+  outline: 2px solid var(--color-nier-bg);
+  outline-offset: -6px;
+}
+
+.project-monitor-play-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: var(--space-xs) var(--space-md);
+  border-top: 1px solid var(--color-nier-bg);
+  border-bottom: 1px solid var(--color-nier-bg);
+  background: var(--color-nier-dark);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+}
+
+html.has-js .project-monitor-screen.is-playing .project-monitor-play {
+  display: none;
+}
+
+.project-monitor-pause {
+  display: none;
+  position: absolute;
+  right: var(--space-sm);
+  bottom: var(--space-sm);
+  z-index: 3;
+  margin: 0;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: var(--space-xs) var(--space-md);
+  border: 0;
+  border-top: 1px solid var(--color-nier-bg);
+  border-bottom: 1px solid var(--color-nier-bg);
+  border-radius: 0;
+  cursor: pointer;
+  color: var(--color-nier-bg);
+  background: var(--color-nier-dark);
+  font-family: inherit;
+  font-size: var(--text-dense);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  transition: background-color var(--duration-nier-ui) var(--ease-nier-out), color var(--duration-nier-ui) var(--ease-nier-out);
+}
+
+html.has-js .project-monitor-screen.is-playing .project-monitor-pause:not([hidden]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-monitor-pause:hover,
+.project-monitor-pause:focus-visible {
+  background: var(--color-nier-bg);
+  color: var(--color-nier-dark);
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+html.has-js .project-monitor-screen:not(.is-playing) video {
+  opacity: 0;
+}
+
+html.has-js .project-monitor-screen.is-playing video {
+  opacity: 1;
+}
+
+.project-monitor-status {
+  display: none;
+  position: absolute;
+  left: var(--space-md);
+  right: var(--space-md);
+  bottom: var(--space-md);
+  z-index: 2;
+  margin: 0;
+  padding: var(--space-xs) var(--space-md);
+  border-top: 1px solid var(--color-nier-bg);
+  border-bottom: 1px solid var(--color-nier-bg);
+  background: var(--color-nier-dark);
+  color: var(--color-nier-bg);
+  font-size: var(--text-dense);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+html.has-js .project-monitor-screen.is-error .project-monitor-play {
+  align-items: flex-start;
+  padding-top: var(--space-xl);
+}
+
+html.has-js .project-monitor-screen.is-error .project-monitor-status:not([hidden]) {
+  display: block;
+}
+
+.project-featured-copy {
+  margin: 0;
+  font-size: var(--text-ui);
+  line-height: 1.5;
+  max-width: 65ch;
+  text-wrap: pretty;
+  text-transform: none;
+  letter-spacing: 0.03em;
+  overflow-wrap: break-word;
+}
+
+.project-featured-copy--lead {
+  font-size: var(--text-body);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ---- Footer ---- */
+
+.footer-bar {
+  margin-top: var(--space-2xl);
+  padding: var(--space-lg) 0 var(--space-sm);
+  border-top: 1px solid color-mix(in srgb, var(--color-nier-dark) 35%, transparent);
+  text-align: center;
+}
+
+.footer-text p {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.footer-text small {
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-nier-dark-muted);
+  font-weight: 500;
+}
+
+.footer-text a {
+  color: var(--color-nier-orange-ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-text a:hover,
+.footer-text a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.footer-text a:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+/* ---- Motion ---- */
+
+@keyframes nier-view-settle {
+  from {
+    transform: translateY(0.35rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .nier-shell-body {
+    animation: none;
+  }
+
+  .project-card,
+  a.project-card--link,
+  .project-monitor-play,
+  .project-monitor-pause {
+    transition: none;
+  }
+
+  /* transform: none ≡ identity (full wipe). Hide the wipe; swap solid fills instead. */
+  .nier-btn::before {
+    content: none;
+    transform: scaleX(0);
+  }
+
+  .nier-btn:hover,
+  .nier-btn:focus-visible,
+  .nier-btn:active {
+    background-color: var(--color-nier-dark);
+    color: var(--color-nier-bg);
+  }
+
+  a.nier-btn:hover,
+  a.nier-btn:focus-visible {
+    color: var(--color-nier-bg);
+  }
+
+  .nier-btn--ink:hover,
+  .nier-btn--ink:focus-visible,
+  .nier-btn--ink:active {
+    background-color: var(--color-nier-light);
+    color: var(--color-nier-dark);
+  }
+
+  a.nier-btn--ink:hover,
+  a.nier-btn--ink:focus-visible {
+    color: var(--color-nier-dark);
+  }
+
+  a.project-card--link:hover,
+  a.project-card--link:focus-visible {
+    transform: none;
+  }
+}
+
+/* ---- Responsive ---- */
+
+/* Coarse pointers (phones, tablets, touch laptops): prefer tap-sized controls */
+@media (pointer: coarse) {
+  .nier-btn,
+  .nier-btn--compact,
+  .project-monitor-play-label,
+  .project-monitor-pause {
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+  }
+
+  .nav_bar {
+    gap: var(--space-sm);
+  }
+
+  a.project-card--link {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .dossier {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "rail"
+      "projects"
+      "skills";
+    gap: var(--space-md);
+  }
+
+  /* Let rail / projects / skills participate in the page grid so skills follow proof */
+  .dossier-left {
+    display: contents;
+  }
+
+  .dossier-rail {
+    grid-area: rail;
+  }
+
+  .dossier-projects {
+    grid-area: projects;
+  }
+
+  .dossier-skills {
+    grid-area: skills;
+  }
+
+  .nav_bar {
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .nav_bar .nier-btn--compact {
+    flex: 1 1 calc(50% - var(--space-xs));
+  }
+
+  .nier-btn--compact {
+    flex: 1 1 auto;
+  }
+
+  .photo-frame {
+    margin-bottom: var(--space-sm);
+  }
+
+  .photo-frame img {
+    max-width: 96px;
+  }
+
+  .project-featured-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bio-actions {
+    flex-direction: column;
+    margin-top: var(--space-md);
+  }
+
+  .bio-actions .nier-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 2.75rem;
+  }
+
+  #achievements {
+    margin-top: var(--space-md);
+    padding-top: var(--space-sm);
+  }
+
+  .dossier-rail .nier-inner-box {
+    padding: var(--space-md);
+  }
+
+  .skill-cluster {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space-xs) * 0.5);
+  }
+
+  .project-featured-copy,
+  .project-featured-copy--lead,
+  .project-card p {
+    font-size: max(1rem, var(--text-body));
+  }
+
+  .bio-text .bio-type,
+  .bio-edu,
+  .project-featured-meta,
+  .project-card-kicker,
+  .nier-meta,
+  .footer-text small,
+  .skill-cluster dt,
+  .skill-cluster dd,
+  .project-monitor-play-label,
+  .project-monitor-pause,
+  .project-monitor-status,
+  .skill-list {
+    font-size: max(0.875rem, var(--text-label));
+  }
+}
+
+/* Tablet / narrow landscape: keep dossier readable without phone stacking rules alone */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .dossier {
+    gap: var(--space-md);
+  }
+
+  .photo-frame img {
+    max-width: 120px;
+  }
+
+  .nav_bar .nier-btn--compact {
+    flex: 1 1 auto;
+    min-width: max(2.75rem, 6.5rem);
+  }
+
+  .skill-cluster {
+    grid-template-columns: minmax(5.5rem, 6.75rem) minmax(0, 1fr);
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .nav_bar .nier-btn--compact {
+    flex: 1 1 100%;
+    font-size: var(--text-caption);
+  }
+
+  .nier-shell {
+    padding-right: max(var(--space-sm), env(safe-area-inset-right, 0));
+    padding-left: max(var(--space-sm), env(safe-area-inset-left, 0));
+  }
+
+  .nier-ornament {
+    margin-left: calc(-1 * max(var(--space-sm), env(safe-area-inset-left, 0)));
+    margin-right: calc(-1 * max(var(--space-sm), env(safe-area-inset-right, 0)));
+    padding-left: max(var(--space-sm), env(safe-area-inset-left, 0));
+    padding-right: max(var(--space-sm), env(safe-area-inset-right, 0));
+  }
+
+  .photo-frame img {
+    max-width: 80px;
+  }
+}
+
+/* Landscape phones: tighten chrome so identity + CTA still fit */
+@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+  .photo-frame img {
+    max-width: 72px;
+  }
+
+  .nav_bar {
+    margin-bottom: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+}
