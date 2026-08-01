@@ -1,4 +1,4 @@
-LIVE WEBSITE LINK: [https://senjonanaya.github.io/CMSC100_EXER2/](https://senjonanaya.github.io/portfolio-nanaya/)
+LIVE WEBSITE LINK: [https://senjonanaya.github.io/](https://senjonanaya.github.io/portfolio-nanaya/)
 
 Portfolio Github Pages using CSS/HTML
 
