@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#dcd8c0">
+    <meta name="description" content="Case study: Pathag, a campus map that scores walking routes for accessibility. Team of five; obstacle reports affect routing only after verification. Hackathon prototype.">
+    <link rel="canonical" href="https://rkoperator-ledger.com/work/pathag.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Galvin M. Gonzales · CS Portfolio">
+    <meta property="og:title" content="Pathag: case study">
+    <meta property="og:description" content="A campus map that scores walking routes for accessibility. Team of five; verifier-gated obstacle reports; phone-app prototype.">
+    <meta property="og:url" content="https://rkoperator-ledger.com/work/pathag.html">
+    <meta property="og:image" content="https://rkoperator-ledger.com/assets/og-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pathag: case study">
+    <meta name="twitter:description" content="A campus map that scores walking routes for accessibility. Team of five; verifier-gated obstacle reports.">
+    <meta name="twitter:image" content="https://rkoperator-ledger.com/assets/og-preview.jpg">
+    <title>Pathag: case study · Galvin M. Gonzales</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../tokens.css">
+    <link rel="stylesheet" type="text/css" href="../work/work.css">
+  </head>
+
+  <body>
+    <a class="case-skip-link" href="#main-content">Skip to main content</a>
+    <main class="case-page" id="main-content">
+      <a class="case-back" href="../index.html#work">← Back to selected work</a>
+      <p class="case-kicker">Case study · Team project · March 2026</p>
+      <h1>Pathag</h1>
+      <p class="case-summary">A campus map that scores walking routes for accessibility, built by a team of five for a hackathon and shipped with a phone-app prototype.</p>
+
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd>Team leader</dd></div>
+        <div><dt>Dates</dt><dd>March 2026</dd></div>
+        <div><dt>Team size</dt><dd>5</dd></div>
+        <div><dt>Stack</dt><dd>FastAPI · PostgreSQL/PostGIS · MobileNetV3 · Flutter (prototype)</dd></div>
+        <div><dt>Links</dt><dd><a href="https://github.com/SenjoNanaya/Pathag" target="_blank" rel="noopener noreferrer">Pathag on GitHub<span class="visually-hidden"> (opens in new tab)</span></a></dd></div>
+      </dl>
+
+      <h2>Context</h2>
+      <p>Pathag started as a hackathon entry for pedestrian accessibility on the UPLB campus: score campus walking routes for accessibility, and let people report obstacles. The team won collegiate champion at EXPE21ENCE YSES: The HackFest (Team Iterate).</p>
+      <p>Crowd-sourced reports are noisy. A route scorer that trusts every report will send people down bad paths, so verification had to be part of the design, not an afterthought.</p>
+
+      <h2>Constraints</h2>
+      <ul>
+        <li>Hackathon prototype, not a deployed navigation service.</li>
+        <li>Auth and users modules are scaffolds.</li>
+        <li>Image classification results stay advisory until verified.</li>
+      </ul>
+
+      <h2>What I did</h2>
+      <p>As team leader, I led a team of five to the collegiate title and built the backend core: ranked 5+ campus walking paths by accessibility, with 3 REST endpoints and a WebSocket channel for obstacle reports and crowd-sourced verification. I also integrated 6-class path-condition and binary obstacle classifiers plus the Flutter prototype client.</p>
+
+      <h2>Key decisions</h2>
+      <ul>
+        <li>Gated route influence behind verification: obstacle reports affect scoring only after the verification threshold is met.</li>
+        <li>Kept image classification results advisory (<code>eligible_for_live_map=false</code>) until checked.</li>
+        <li>Separated the ML service from the routing service.</li>
+      </ul>
+
+      <h2>Verification</h2>
+      <p>The prototype is designed to apply obstacle reports to route scoring only after the verification threshold is met. Image classification responses stay advisory until verified.</p>
+
+      <h2>Result</h2>
+      <p>A working prototype: accessibility-scored campus routes, REST and WebSocket endpoints for reports and verification, ML classifiers behind verifier gates, and a phone-app prototype client, presented to a collegiate-champion finish at the HackFest.</p>
+
+      <h2>Limitation</h2>
+      <p>This is a hackathon prototype, not a deployed service. The available project evidence does not establish how it performs on real commutes or prove that any route is safe.</p>
+
+      <h2>What I would do next</h2>
+      <ul>
+        <li>Test with real accessibility volunteers on more campus routes and record where the scores disagree with them.</li>
+        <li>Expand coverage beyond the initial campus area before claiming anything about other places.</li>
+        <li>Replace the auth and users scaffolds before any pilot with real accounts.</li>
+      </ul>
+
+      <p class="case-links">
+        <a href="https://github.com/SenjoNanaya/Pathag" target="_blank" rel="noopener noreferrer">Pathag on GitHub<span class="visually-hidden"> (opens in new tab)</span></a>
+      </p>
+
+      <footer class="case-footer">
+        <p><a href="../index.html#work">← Back to selected work</a> · <a href="../index.html">Home</a> · Contact: <a href="mailto:gmgonzales6@up.edu.ph">gmgonzales6@up.edu.ph</a></p>
+      </footer>
+    </main>
+  </body>
+</html>

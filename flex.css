@@ -2,52 +2,8 @@
   YoRHa / NieR:Automata portfolio chrome.
   Tokens and patterns adapted from Edge (DESIGN.md + frontend/src/index.css).
   Heritage: Lev CodePen (levise) + in-game YorHa menus.
+  Design tokens live in tokens.css (linked before this file).
 */
-
-:root {
-  --color-nier-bg: #c8c2aa;
-  --color-nier-dark: #3f3b32;
-  --color-nier-dark-muted: #4a453c;
-  --color-nier-light: #dcd8c0;
-  --color-nier-gray: #bab5a1;
-  --color-nier-orange: #a67c52;
-  --color-nier-orange-ink: #5c4024;
-
-  --font-nier: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  --text-caption: 0.75rem;
-  --text-dense: 0.8125rem;
-  --text-ui: 0.8125rem;
-  --text-label: 0.875rem;
-  --text-body: 1rem;
-  --text-heading: 1.125rem;
-  --text-title: 1.25rem;
-
-  --tracking-ui: 0.1em;
-  --tracking-display: 0.18em;
-  --tracking-name: 0.02em;
-
-  --space-xs: 0.4rem;
-  --space-sm: 0.65rem;
-  --space-md: 0.85rem;
-  --space-lg: 1.25rem;
-  --space-xl: 1.5rem;
-  --space-2xl: 2.25rem;
-  --space-shell: 3px;
-  --space-matte: 4px;
-  --space-hair: 0.15rem;
-
-  --ease-nier-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration-nier-fast: 0.12s;
-  --duration-nier-mid: 0.15s;
-  --duration-nier-ui: 0.22s;
-
-  --surface-nier-inner: color-mix(in srgb, var(--color-nier-light) 42%, transparent);
-  --surface-nier-panel: color-mix(in srgb, var(--color-nier-light) 40%, transparent);
-  --surface-nier-recessed: color-mix(in srgb, var(--color-nier-light) 28%, transparent);
-  --shadow-nier-lift: 3px 3px 0 color-mix(in srgb, var(--color-nier-dark) 40%, transparent);
-  --shadow-nier-lift-strong: 3px 3px 0 color-mix(in srgb, var(--color-nier-dark) 45%, transparent);
-}
 
 *,
 *::before,
@@ -1148,6 +1104,202 @@ html.has-js .project-monitor-screen.is-error .project-monitor-status:not([hidden
   margin: 0;
 }
 
+/* ---- Case studies (native details) ---- */
+
+.case-study {
+  margin-top: var(--space-sm);
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-recessed);
+}
+
+.case-study-summary {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.case-study-summary::-webkit-details-marker {
+  display: none;
+}
+
+.case-study-summary::before {
+  content: "[+]";
+  margin-right: var(--space-xs);
+  font-weight: 700;
+}
+
+.case-study[open] .case-study-summary::before {
+  content: "[–]";
+}
+
+.case-study-summary:hover,
+.case-study-summary:focus-visible {
+  background-color: var(--color-nier-dark);
+  color: var(--color-nier-bg);
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+.case-study-panel {
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-nier-dark);
+  font-size: var(--text-ui);
+  line-height: 1.55;
+  max-width: 65ch;
+}
+
+.case-study-panel h4 {
+  margin: var(--space-md) 0 var(--space-xs);
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+}
+
+.case-study-panel h4:first-of-type {
+  margin-top: var(--space-sm);
+}
+
+.case-study-panel p {
+  margin: 0 0 var(--space-xs);
+  overflow-wrap: break-word;
+}
+
+.case-study-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--space-xs) var(--space-md);
+  margin: 0 0 var(--space-sm);
+}
+
+.case-study-grid > div {
+  margin: 0;
+}
+
+.case-study-grid dt {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-nier-dark-muted);
+}
+
+.case-study-grid dd {
+  margin: 0;
+}
+
+.case-study-links a {
+  color: var(--color-nier-orange-ink);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.case-study-links a:hover,
+.case-study-links a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.case-study-links a:focus-visible,
+.case-study-summary:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+.case-study-note {
+  font-size: var(--text-dense);
+  color: var(--color-nier-dark-muted);
+}
+
+/* ---- Verify strip ---- */
+
+#verify {
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-recessed);
+  padding: var(--space-md) var(--space-lg);
+}
+
+#verify .section-heading {
+  margin-top: 0;
+}
+
+.verify-strip {
+  list-style: square;
+  margin: 0;
+  padding-inline-start: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  font-size: var(--text-ui);
+  line-height: 1.55;
+  max-width: 65ch;
+}
+
+.verify-strip code {
+  font-size: 0.95em;
+  overflow-wrap: anywhere;
+}
+
+/* ---- Bio additions ---- */
+
+.bio-focus {
+  margin: 0;
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-nier-orange-ink);
+}
+
+.bio-avail {
+  margin: 0;
+  font-size: var(--text-ui);
+}
+
+.bio-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  margin: var(--space-sm) 0 0;
+  padding: 0;
+  font-size: var(--text-ui);
+}
+
+.bio-links a {
+  color: var(--color-nier-orange-ink);
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.bio-links a:hover,
+.bio-links a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.bio-links a:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+.demo-note {
+  margin: var(--space-sm) 0 0;
+  font-size: var(--text-dense);
+  color: var(--color-nier-dark-muted);
+}
+
 /* ---- Footer ---- */
 
 .footer-bar {
@@ -1213,8 +1365,16 @@ html.has-js .project-monitor-screen.is-error .project-monitor-status:not([hidden
   .project-card,
   a.project-card--link,
   .project-monitor-play,
-  .project-monitor-pause {
+  .project-monitor-pause,
+  .case-study-summary,
+  .work-thumb {
     transition: none;
+  }
+
+  a.thumb-link:hover .work-thumb,
+  a.thumb-link:focus-visible .work-thumb,
+  .work-row:focus-within .work-thumb {
+    transform: none;
   }
 
   /* transform: none ≡ identity (full wipe). Hide the wipe; swap solid fills instead. */
@@ -1354,7 +1514,9 @@ html.has-js .project-monitor-screen.is-error .project-monitor-status:not([hidden
 
   .project-featured-copy,
   .project-featured-copy--lead,
-  .project-card p {
+  .project-card p,
+  .case-study-panel,
+  .verify-strip {
     font-size: max(1rem, var(--text-body));
   }
 
@@ -1418,6 +1580,106 @@ html.has-js .project-monitor-screen.is-error .project-monitor-status:not([hidden
   }
 }
 
+.profile-value--short {
+  display: none;
+}
+
+/* Very small phones: tighten chrome and show work before proof so two
+   project names stay visible. DOM order is unchanged (proof still first
+   for keyboard and screen readers). */
+@media (max-width: 480px) {
+  .profile-value {
+    display: none;
+  }
+
+  .profile-value--short {
+    display: block;
+  }
+
+  /* Stack portrait above full-width text: single-line edu/focus,
+     two-line value — saves ~25px for the work index.
+     NOTE: keep default stretch (not flex-start) so the text block
+     spans the full width; otherwise lines wrap early. */
+  #profile .profile-inner {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  #profile .profile-edu {
+    letter-spacing: 0.02em;
+  }
+
+  #profile .profile-focus {
+    letter-spacing: 0.04em;
+  }
+
+  /* Narrow screens follow DOM order (work first, proof near the
+     bottom), so no area overrides are needed here. */
+}
+
+/* Very small phones: tighten chrome. DOM order already puts work
+   first and proof near the bottom. Three-up nav stays on one row. */
+@media (max-width: 360px) {
+  .nier-shell {
+    padding-right: max(var(--space-sm), env(safe-area-inset-right, 0));
+    padding-left: max(var(--space-sm), env(safe-area-inset-left, 0));
+  }
+
+  .profile .nier-inner-box {
+    padding: var(--space-sm);
+  }
+
+  #profile .profile-photo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .profile-contact a[href^="mailto:"] {
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .profile-value--short {
+    letter-spacing: 0;
+  }
+
+  .profile-edu {
+    letter-spacing: 0.04em;
+  }
+
+  .profile-text > p + p {
+    margin-top: 6px;
+  }
+
+  .nav_bar--compact .nier-btn--compact {
+    min-height: 2.25rem;
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
+  .nav_bar--compact {
+    margin-bottom: 6px;
+  }
+
+  #work > .section-heading {
+    margin-top: 6px;
+  }
+
+  .dossier#main-content {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "work"
+      "about"
+      "skills"
+      "proof";
+  }
+
+  .work-row {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+}
+
 /* Landscape phones: tighten chrome so identity + CTA still fit */
 @media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
   .photo-frame img {
@@ -1427,5 +1689,681 @@ html.has-js .project-monitor-screen.is-error .project-monitor-status:not([hidden
   .nav_bar {
     margin-bottom: var(--space-xs);
     padding-bottom: var(--space-xs);
+  }
+}
+
+/* ---- One-screen pass: full-width profile, proof row, work index ---- */
+
+#profile,
+#proof,
+#work,
+#check,
+#about,
+#contact {
+  scroll-margin-top: max(var(--space-lg), env(safe-area-inset-top, 0));
+}
+
+.profile {
+  max-width: 1200px;
+  margin: 0 auto var(--space-md);
+}
+
+.profile-inner {
+  flex-direction: row;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+
+.profile-photo {
+  flex: 0 0 auto;
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border: 2px solid var(--color-nier-dark);
+  padding: var(--space-matte);
+  background: var(--color-nier-dark);
+  filter: sepia(100%) contrast(0.9);
+  box-shadow: var(--shadow-nier-lift);
+}
+
+.profile-photo.is-broken {
+  filter: none;
+  object-fit: none;
+  background: var(--surface-nier-recessed);
+}
+
+.profile-text {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.profile-text h1 {
+  margin: 0 0 var(--space-xs);
+  font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-name);
+  border-bottom: 2px solid var(--color-nier-dark);
+  display: inline-block;
+  padding-bottom: var(--space-hair);
+}
+
+.profile-edu {
+  margin: 0 0 var(--space-xs);
+}
+
+.profile-focus {
+  margin: 0;
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-nier-orange-ink);
+}
+
+.profile-avail {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--text-ui);
+}
+
+.profile-value {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--text-body);
+  max-width: none;
+}
+
+.profile-contact {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--text-ui);
+  max-width: none;
+}
+
+.profile-contact a {
+  color: var(--color-nier-orange-ink);
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.profile-contact a:hover,
+.profile-contact a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.profile-contact a:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+/* Proof row: three awards, once each */
+
+#proof {
+  max-width: none;
+  margin: 0;
+}
+
+#proof .section-heading {
+  margin-top: 0;
+}
+
+.proof-row {
+  list-style: square;
+  margin: 0;
+  padding: var(--space-md) var(--space-lg) var(--space-md) var(--space-2xl);
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-recessed);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-xs) var(--space-lg);
+  font-size: var(--text-ui);
+  line-height: 1.5;
+}
+
+/* Work index: four equal compact rows */
+
+.dossier {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-areas:
+    "work work"
+    "about skills"
+    "proof proof";
+}
+
+#proof {
+  grid-area: proof;
+  min-width: 0;
+  margin-bottom: var(--space-sm);
+}
+
+#work {
+  grid-area: work;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+#work > .section-heading {
+  margin-bottom: 0;
+}
+
+#check {
+  grid-area: check;
+  min-width: 0;
+  align-self: start;
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-recessed);
+  padding: var(--space-md) var(--space-lg);
+}
+
+#check .section-heading {
+  margin-top: 0;
+}
+
+#cases {
+  grid-area: cases;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+#about {
+  grid-area: about;
+  min-width: 0;
+  align-self: start;
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-recessed);
+  padding: var(--space-md) var(--space-lg);
+}
+
+#about .section-heading {
+  margin-top: 0;
+}
+
+#about p {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--text-body);
+  line-height: 1.5;
+  max-width: 65ch;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+#about p:last-child {
+  margin-bottom: 0;
+}
+
+#about .about-tools {
+  font-size: var(--text-ui);
+  color: var(--color-nier-dark-muted);
+}
+
+#skills {
+  grid-area: skills;
+  min-width: 0;
+  align-self: start;
+}
+
+.work-row {
+  display: grid;
+  grid-template-columns: 342px minmax(0, 1fr);
+  gap: var(--space-md);
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-panel);
+  padding: 8px var(--space-md);
+  box-shadow: var(--shadow-nier-lift);
+  color: var(--color-nier-dark);
+}
+
+.work-row--short {
+  background: var(--surface-nier-recessed);
+  box-shadow: none;
+}
+
+.work-body {
+  min-width: 0;
+}
+
+.work-thumb {
+  display: block;
+  width: 342px;
+  aspect-ratio: 342 / 124;
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-recessed);
+  overflow: hidden;
+  align-self: start;
+  transition:
+    transform var(--duration-nier-ui) var(--ease-nier-out),
+    border-color var(--duration-nier-fast) var(--ease-nier-out),
+    box-shadow var(--duration-nier-fast) var(--ease-nier-out);
+}
+
+a.thumb-link {
+  display: block;
+  text-decoration: none;
+}
+
+a.thumb-link:hover .work-thumb,
+a.thumb-link:focus-visible .work-thumb,
+.work-row:focus-within .work-thumb {
+  transform: scale(1.04);
+  border: 2px solid var(--color-nier-orange-ink);
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--color-nier-dark) 55%, transparent);
+}
+
+a.thumb-link:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+.work-thumb--rk {
+  background-image: url("assets/rk-operator-ledger-poster.jpg");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.work-thumb--tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.work-thumb--pathag {
+  background-image: url("assets/pathag-workflow.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.work-thumb--kitacred {
+  background-image: url("assets/kitacred-concept-mockup.jpg");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.work-thumb-number {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--tracking-name);
+}
+
+.work-thumb-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-nier-dark-muted);
+}
+
+.work-name {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-heading);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.work-name-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.work-name-link:hover {
+  color: var(--color-nier-orange-ink);
+}
+
+.work-name-link:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+.work-role {
+  font-weight: 500;
+  letter-spacing: var(--tracking-name);
+  text-transform: none;
+  color: var(--color-nier-dark-muted);
+  font-size: var(--text-label);
+}
+
+.work-desc {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-body);
+  line-height: 1.5;
+  max-width: none;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.work-meta {
+  margin: 0;
+  font-size: var(--text-ui);
+  line-height: 1.5;
+  max-width: none;
+  overflow-wrap: break-word;
+}
+
+.work-meta a {
+  color: var(--color-nier-orange-ink);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.work-meta a:hover,
+.work-meta a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.work-meta a:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+/* Outcome / Scale evidence pair */
+
+.work-evidence {
+  display: grid;
+  gap: 2px;
+  margin: var(--space-xs) 0 0;
+  padding: 0;
+  font-size: var(--text-body);
+  line-height: 1.5;
+}
+
+.work-evidence > div {
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr);
+  gap: var(--space-xs);
+}
+
+.work-evidence dt {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-nier-dark-muted);
+  font-size: var(--text-caption);
+}
+
+.work-evidence dd {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.work-links {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--text-body);
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.work-links a {
+  color: var(--color-nier-orange-ink);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.work-links a:hover,
+.work-links a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.work-links a:focus-visible {
+  outline: 2px solid var(--color-nier-dark);
+  outline-offset: 2px;
+}
+
+.work-note {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--text-body);
+  color: var(--color-nier-dark-muted);
+  max-width: 65ch;
+}
+
+/* Thumbnail viewer dialog (progressive enhancement over plain links) */
+
+.thumb-dialog {
+  border: 2px solid var(--color-nier-dark);
+  background: var(--color-nier-light);
+  color: var(--color-nier-dark);
+  padding: var(--space-lg);
+  max-width: min(92vw, 620px);
+  box-shadow: var(--shadow-nier-lift-strong);
+}
+
+.thumb-dialog::backdrop {
+  background: color-mix(in srgb, var(--color-nier-dark) 55%, transparent);
+}
+
+.thumb-dialog-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  max-height: 60vh;
+  margin: 0 auto;
+  border: 1px solid var(--color-nier-dark);
+}
+
+.thumb-dialog-img[hidden],
+.thumb-dialog-tile[hidden] {
+  display: none;
+}
+
+.thumb-dialog-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-height: 180px;
+  border: 1px solid var(--color-nier-dark);
+  background: var(--surface-nier-recessed);
+}
+
+.thumb-dialog-number {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.thumb-dialog-label {
+  font-size: var(--text-dense);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-nier-dark-muted);
+}
+
+.thumb-dialog-caption {
+  margin: var(--space-sm) 0 var(--space-md);
+  font-size: var(--text-ui);
+  line-height: 1.5;
+}
+
+.thumb-dialog form {
+  margin: 0;
+  text-align: center;
+}
+
+/* Compact nav: one slim row, never full-width buttons */
+
+.nav_bar--compact {
+  gap: var(--space-xs);
+}
+
+.nav_bar--compact .nier-btn--compact {
+  padding: var(--space-xs) var(--space-md);
+  min-height: 2.5rem;
+}
+
+/* First-screen rhythm: keep header, proof, and all four work rows
+   inside 800px without touching the YoRHa chrome. */
+
+.profile {
+  margin-bottom: var(--space-sm);
+}
+
+.profile .nier-inner-box {
+  padding: 0.625rem 1.25rem;
+}
+
+#proof {
+  margin-bottom: var(--space-sm);
+}
+
+#proof .section-heading,
+#work > .section-heading {
+  margin-top: var(--space-sm);
+  margin-bottom: 4px;
+}
+
+.proof-row {
+  padding: 4px var(--space-md) 4px var(--space-xl);
+}
+
+#work {
+  gap: 2px;
+  margin-bottom: var(--space-sm);
+}
+
+.work-row {
+  padding: 3px var(--space-md);
+}
+
+.nav_bar--compact {
+  margin-bottom: var(--space-sm);
+  padding-top: 0;
+}
+
+@media (max-width: 768px) {
+  .profile-inner {
+    gap: var(--space-md);
+  }
+
+  .profile-photo {
+    width: 88px;
+    height: 88px;
+  }
+
+  .work-row {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  .work-thumb {
+    width: 200px;
+  }
+
+  .work-thumb-number {
+    font-size: 1.5rem;
+  }
+
+  .proof-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dossier {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "work"
+      "about"
+      "skills"
+      "proof";
+  }
+
+  .profile-edu {
+    letter-spacing: 0.06em;
+  }
+
+  .nav_bar--compact {
+    flex-wrap: nowrap;
+    overflow-x: visible;
+    justify-content: stretch;
+    gap: var(--space-xs);
+    padding-bottom: var(--space-xs);
+  }
+
+  .nav_bar--compact .nier-btn--compact {
+    flex: 1 1 0;
+    min-width: 0;
+    white-space: nowrap;
+    text-align: center;
+    font-size: var(--text-dense);
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+  }
+
+  .nier-shell-body {
+    padding-top: 0;
+  }
+
+  .profile .nier-inner-box {
+    padding: 0.625rem 1rem;
+  }
+
+  .profile-text > p + p {
+    margin-top: 5px;
+  }
+
+  .work-row {
+    padding: 4px var(--space-md);
+  }
+
+  #proof .section-heading,
+  #work > .section-heading,
+  #about .section-heading,
+  #skills .section-heading {
+    margin-top: 6px;
+    margin-bottom: 2px;
+  }
+
+  .proof-row {
+    gap: 6px;
+  }
+
+  .work-row {
+    padding: 3px var(--space-md);
+  }
+
+  .work-desc,
+  .work-meta,
+  .verify-strip,
+  .case-study-panel {
+    font-size: max(1rem, var(--text-body));
+  }
+}
+
+/* Very small phones: keep the 2x2 nav grid compact and readable.
+   Appended last so it wins over the older stacked-button rule. */
+@media (max-width: 360px) {
+  .nav_bar--compact {
+    gap: 4px;
+  }
+
+  .nav_bar--compact .nier-btn--compact {
+    min-height: 2.25rem;
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+    font-size: var(--text-dense);
+  }
+}
+
+/* Small phones: stack the thumbnail above the text so the wide tile
+   keeps its aspect without squeezing or overflowing. */
+@media (max-width: 480px) {
+  .work-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .work-thumb {
+    width: 100%;
   }
 }

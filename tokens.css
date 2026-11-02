@@ -1,0 +1,51 @@
+/*
+  Shared design tokens: palette, type, spacing, motion.
+  Linked by every page (home: tokens.css + flex.css; case studies:
+  ../tokens.css + work.css) so the YoRHa home and the quiet case-study
+  pages stay consistent. Case-study pages must not depend on flex.css.
+*/
+
+:root {
+  --color-nier-bg: #c8c2aa;
+  --color-nier-dark: #3f3b32;
+  --color-nier-dark-muted: #4a453c;
+  --color-nier-light: #dcd8c0;
+  --color-nier-gray: #bab5a1;
+  --color-nier-orange: #a67c52;
+  --color-nier-orange-ink: #5c4024;
+
+  --font-nier: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --text-caption: 0.75rem;
+  --text-dense: 0.8125rem;
+  --text-ui: 0.8125rem;
+  --text-label: 0.875rem;
+  --text-body: 1rem;
+  --text-heading: 1.125rem;
+  --text-title: 1.25rem;
+
+  --tracking-ui: 0.1em;
+  --tracking-display: 0.18em;
+  --tracking-name: 0.02em;
+
+  --space-xs: 0.4rem;
+  --space-sm: 0.65rem;
+  --space-md: 0.85rem;
+  --space-lg: 1.25rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2.25rem;
+  --space-shell: 3px;
+  --space-matte: 4px;
+  --space-hair: 0.15rem;
+
+  --ease-nier-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-nier-fast: 0.12s;
+  --duration-nier-mid: 0.15s;
+  --duration-nier-ui: 0.22s;
+
+  --surface-nier-inner: color-mix(in srgb, var(--color-nier-light) 42%, transparent);
+  --surface-nier-panel: color-mix(in srgb, var(--color-nier-light) 40%, transparent);
+  --surface-nier-recessed: color-mix(in srgb, var(--color-nier-light) 28%, transparent);
+  --shadow-nier-lift: 3px 3px 0 color-mix(in srgb, var(--color-nier-dark) 40%, transparent);
+  --shadow-nier-lift-strong: 3px 3px 0 color-mix(in srgb, var(--color-nier-dark) 45%, transparent);
+}

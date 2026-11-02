@@ -1,0 +1,88 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Galvin Gonzales - Resume},
+  pdfauthor={Galvin Gonzales},
+  pdfsubject={Computer Science Undergraduate Resume}
+}
+
+% Letter paper with 0.6 in margins on all sides.
+\setlength{\textwidth}{7.3in}
+\setlength{\oddsidemargin}{-0.4in}
+\setlength{\evensidemargin}{-0.4in}
+\setlength{\topmargin}{-0.4in}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\footskip}{0pt}
+\setlength{\textheight}{9.8in}
+
+\pagestyle{empty}
+\linespread{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\vspace{-6pt}\rule{\linewidth}{0.5pt}]
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+
+\newcommand{\entry}[2]{\par\vspace{4pt}\textbf{#1}\hfill #2\par}
+\newcommand{\subentry}[1]{\textit{#1}\par}
+
+\setlist[itemize]{leftmargin=1.05em,labelsep=0.4em,topsep=0pt,itemsep=1.5pt,parsep=0pt,partopsep=0pt}
+
+\begin{document}
+\raggedright
+
+\begin{center}
+  {\fontsize{20}{22}\selectfont\bfseries Galvin Gonzales}\\[2pt]
+  {\small \href{mailto:gmgonzales6@up.edu.ph}{gmgonzales6@up.edu.ph} \enspace|\enspace \href{https://linkedin.com/in/galvin-gonzales-884838375}{\mbox{linkedin.com/in/galvin-gonzales-884838375}}}\\[1pt]
+  {\small \href{https://github.com/SenjoNanaya}{\mbox{github.com/SenjoNanaya}} \enspace|\enspace \href{https://senjonanaya.github.io/portfolio-nanaya/}{\mbox{senjonanaya.github.io/portfolio-nanaya}}}
+\end{center}
+
+\section*{Education}
+\textbf{B.S. Computer Science}\hfill August 2024 - Present\\
+University of the Philippines Los Baños
+
+\section*{Technical Skills}
+\textbf{Languages:} Python, JavaScript, Java, C, SQL, HTML, CSS\\
+\textbf{Frameworks \& Libraries:} FastAPI, Django, Flask, React (Vite), Flutter\\
+\textbf{AI \& Vision:} PyTorch, TensorFlow, Keras, OpenCV\\
+\textbf{Tools \& Platforms:} Git, GitHub, PostgreSQL, PostGIS, SQLite, MariaDB, REST \& WebSocket APIs
+
+\section*{Projects}
+
+\entry{RK Operator Ledger | Full Stack Developer}{July 2026}
+\subentry{Personal project | \href{https://github.com/SenjoNanaya/pse-dividend-analysis}{GitHub: PSE Edge scraper and screening UI}}
+\begin{itemize}
+  \item Architected a Philippine Stock Exchange (PSE) screening site that converts EDGE disclosures for 200+ listed companies into searchable, filing-backed metrics.
+  \item Wrote a Python ETL pipeline that scrapes 238 PSE EDGE HTML files and ranks 2,264+ disclosure PDFs into SQLite, parsing thousand/million/billion scale notes so ratios stay filing-backed.
+  \item Exposed the database through a Django REST API consumed by a React (Vite) frontend with 12+ indicators, watchlist, and multi-ticker compare.
+\end{itemize}
+
+\entry{Pathag | Team Leader}{March 2026}
+\subentry{Hackathon prototype | EXPE21ENCE YSES: The HackFest | Collegiate Champion}
+\begin{itemize}
+  \item Led a five-member team to the Collegiate Champion title, shipping Pathag, a pedestrian-accessibility navigation prototype for the UPLB campus.
+  \item Engineered a FastAPI backend on PostgreSQL/PostGIS ranking 5+ campus walking paths by accessibility, with 3 REST endpoints and a WebSocket channel for obstacle reports and crowd-sourced verification.
+  \item Integrated 6-class MobileNetV3 path-condition and binary obstacle classifiers plus a Flutter client, gating route influence behind verifier checks.
+\end{itemize}
+
+\entry{KitaCred | Team Leader}{August 2025}
+\subentry{Hackathon prototype | BPI Data Wave 2025, Track 2 | 1st Place}
+\begin{itemize}
+  \item Directed a four-person team to 1st Place in Track 2 at BPI Data Wave 2025 with KitaCred, a Python microfinance assessment tool built for BPI.
+  \item Prototyped a PyTorch alternative-data trust score that screened 50+ sample applicants in the final demo, folding Eskwelabs mentor feedback into each iteration.
+  \item Delivered a 3-step interactive XAI mockup of the assessment flow aligned to BPI's stated needs for the~final~pitch.
+\end{itemize}
+
+\entry{CIEL | One-Shot Facial Verification}{August 2025}
+\subentry{Personal project | \href{https://github.com/SenjoNanaya/One-shot-Image-Recognition}{github.com/SenjoNanaya/One-shot-Image-Recognition}}
+\begin{itemize}
+  \item Built a one-shot facial verification pipeline across 3 libraries (TensorFlow, Keras, OpenCV), using a Siamese network (Koch et al., ICML 2015) to match live webcam frames to enrolled faces.
+  \item Trained for 50 epochs with Adam and BinaryCrossentropy; used 0.5 detection and verification thresholds and ran webcam matching at 15+ FPS.
+\end{itemize}
+
+\end{document}

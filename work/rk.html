@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#dcd8c0">
+    <meta name="description" content="Case study: RK Operator Ledger, a searchable database of Philippine company filings for screening stocks. Built solo; 238 HTML filings and 2,264+ ranked PDFs; fixture-tested parsing.">
+    <link rel="canonical" href="https://rkoperator-ledger.com/work/rk.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Galvin M. Gonzales · CS Portfolio">
+    <meta property="og:title" content="RK Operator Ledger: case study">
+    <meta property="og:description" content="A searchable database of Philippine company filings for screening stocks. Built solo; fixture-tested parsing; hosted demo offline.">
+    <meta property="og:url" content="https://rkoperator-ledger.com/work/rk.html">
+    <meta property="og:image" content="https://rkoperator-ledger.com/assets/og-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RK Operator Ledger: case study">
+    <meta name="twitter:description" content="A searchable database of Philippine company filings for screening stocks. Built solo; fixture-tested parsing.">
+    <meta name="twitter:image" content="https://rkoperator-ledger.com/assets/og-preview.jpg">
+    <title>RK Operator Ledger: case study · Galvin M. Gonzales</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../tokens.css">
+    <link rel="stylesheet" type="text/css" href="../work/work.css">
+  </head>
+
+  <body>
+    <a class="case-skip-link" href="#main-content">Skip to main content</a>
+    <main class="case-page" id="main-content">
+      <a class="case-back" href="../index.html#work">← Back to selected work</a>
+      <p class="case-kicker">Case study · Personal project · July 2026</p>
+      <h1>RK Operator Ledger</h1>
+      <p class="case-summary">A searchable database of Philippine company filings for screening stocks, built from 238 HTML filings and 2,264+ ranked disclosure PDFs.</p>
+
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd>Individual, personal project</dd></div>
+        <div><dt>Dates</dt><dd>July 2026</dd></div>
+        <div><dt>Team size</dt><dd>1 (individual)</dd></div>
+        <div><dt>Stack</dt><dd>Python ETL · SQLite · Django REST · React (Vite)</dd></div>
+        <div><dt>Links</dt><dd><a href="https://github.com/SenjoNanaya/pse-dividend-analysis" target="_blank" rel="noopener noreferrer">pse-dividend-analysis on GitHub<span class="visually-hidden"> (opens in new tab)</span></a></dd></div>
+      </dl>
+
+      <h2>Context</h2>
+      <p>Stock-exchange disclosures can be difficult to screen. Figures appear in HTML filings and annual-report PDFs, with amounts stated in thousands, millions, or billions. Missing a scale note can distort the resulting calculations.</p>
+      <p>I built this as a personal project to turn those filings into screening metrics: 12+ indicators per company, a watchlist, and multi-ticker comparison, served through a web API with a registry front end.</p>
+
+      <h2>Constraints</h2>
+      <ul>
+        <li>Personal and educational research only. The numbers still need checking against the filings.</li>
+        <li>The hosted demo is offline, so the registry must run from the repository with a one-command demo.</li>
+        <li>Filings state amounts in thousands, millions, or billions; the parser must apply the stated multiplier.</li>
+      </ul>
+
+      <h2>What I did</h2>
+      <p>As the only builder, I wrote the full pipeline: a Python scraper for 238 HTML filing pages, PDF ranking for 2,264+ disclosure PDFs covering 200+ listed companies, SQLite storage with filing-backed figures, a Django REST API, and a React registry with 12+ screening metrics, watchlist, and compare.</p>
+
+      <h2>Key decisions</h2>
+      <ul>
+        <li>Used filing-backed figures where available and labelled incomplete data; some missing fields can also be derived from other figures.</li>
+        <li>Ranked PDFs to fill named fields only, instead of trusting every extracted number.</li>
+        <li>Kept screening thresholds adjustable in the interface, with unset checklist defaults, so a screen can be re-run without rescraping.</li>
+      </ul>
+
+      <figure>
+        <video
+          controls
+          preload="none"
+          poster="../assets/rk-operator-ledger-poster.jpg"
+          width="960"
+          height="540"
+          aria-label="Short walkthrough of RK Operator Ledger"
+        >
+          <source src="../assets/rk-operator-ledger-preview.webm" type="video/webm">
+          <source src="../assets/rk-operator-ledger-preview.mp4" type="video/mp4">
+        </video>
+        <figcaption>Walkthrough of the registry: screen, watchlist, and compare. Video loads only when played.</figcaption>
+      </figure>
+
+      <h2>Verification</h2>
+      <p>Fixture suite checks <code>fixtures/parser/</code> scale-note fixtures (thousands and millions cases), an EDGE layout canary, and screening guards via <code>python scripts/run_fixture_tests.py</code>. No EDGE calls. When a filing says amounts are in millions, a parser test fails if the wrong multiplier is applied.</p>
+
+      <h2>Result</h2>
+      <p>The registry provides 12+ screening metrics, a watchlist, and multi-ticker comparison. The pipeline scraped 238 HTML filing pages and ranked 2,264+ PDFs for 200+ listed companies; a one-command demo uses a sample database.</p>
+
+      <h2>Limitation</h2>
+      <p>The hosted demo is offline; run the one-command demo from the repository. This project ranks disclosure PDFs; it did not parse every PDF fully. It does not prove any figure is correct: personal and educational research only, and numbers still need checking against filings.</p>
+
+      <h2>What I would do next</h2>
+      <ul>
+        <li>Spot-check a sample of computed ratios against the source filings and record the misses.</li>
+        <li>Extend the layout canary so EDGE markup changes fail loudly instead of silently.</li>
+        <li>Write down the demo restore steps before relying on the hosted link for any deadline.</li>
+      </ul>
+
+      <p class="case-links">
+        <a href="https://github.com/SenjoNanaya/pse-dividend-analysis" target="_blank" rel="noopener noreferrer">pse-dividend-analysis on GitHub<span class="visually-hidden"> (opens in new tab)</span></a>
+      </p>
+
+      <footer class="case-footer">
+        <p><a href="../index.html#work">← Back to selected work</a> · <a href="../index.html">Home</a> · Contact: <a href="mailto:gmgonzales6@up.edu.ph">gmgonzales6@up.edu.ph</a></p>
+      </footer>
+    </main>
+  </body>
+</html>
